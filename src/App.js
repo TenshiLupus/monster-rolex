@@ -1,10 +1,25 @@
 import { Component } from "react";
 import logo from "./logo.svg";
 
-import CardList from './components/CardList/CardList.component' 
+import CardList from './components/CardList/CardList.component'
+import SearchBox from "./components/SearchBox/SearchBox.component";
 
 import "./App.css";
 
+//React renders on mount and rerenders on change of state
+//Handler functions are passed as helper functions for children components
+
+const App = () => {
+  return (
+    <div className="App">
+
+      <h1 className="app-title">Monsters Rolodex</h1>
+      <SearchBox onChangeHandler={onSearchChange} placeholder={'search monsters'} className={'monsters-search-box'}/>
+      <CardList monsters={filteredMonsters} />
+
+    </div>
+  )
+}
 
 class App extends Component {
   constructor() {
@@ -45,30 +60,17 @@ class App extends Component {
     const {monsters, searchField} = this.state;
     const {onSearchChange} = this;
 
-    const filteredMonsters = this.state.monsters.filter((monster) => {
-      return monster.name.toLocaleLowerCase().includes(this.state.searchField);
+    const filteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchField);
     })
 
     return (
       <div className="App">
-        <input
-          className="search-box"
-          type="search"
-          placeholder="search monsters"
-          onChange={this.onSearchChange}
-        />
 
-        {/* {filteredMonsters.map((monster) => {
-          return (
-            <div key={monster.id}>
-              <h1>{monster.name}</h1>
-            </div>
-          );
-        })} */}
+        <h1 className="app-title">Monsters Rolodex</h1>
+        <SearchBox onChangeHandler={onSearchChange} placeholder={'search monsters'} className={'monsters-search-box'}/>
+        <CardList monsters={filteredMonsters} />
 
-        <CardList monstersr={filteredMonsters} />
-
-        <button onClick />
       </div>
     );
   }
