@@ -1,22 +1,19 @@
-import {Component} from 'react';
+import { Component } from "react";
 
-import Card from '../Card/Card.component'
-import './CardList.styles.css'
+import Card from "../Card/Card.component";
+import "./CardList.styles.css";
 
-class CardList extends Component {
-    render() {
-        const {monsters} = this.props
 
-        return (
-            <div className='card-list'>
-                {monsters.map(monster => {
-                    return (
-                        <Card monster={monster}/>
-                )})}
-            </div>
-        )
-    }
-}
+//Alledgedly React function parameters only get 2 arguments
+//If we do not have naything else to return we can to an implicit return.
+
+const CardList = ({monsters}) => (
+
+    <div className="card-list">
+      {monsters.map((monster) => {
+        return <Card monster={monster} />;
+      })}
+    </div>
+);
 
 export default CardList;
-
